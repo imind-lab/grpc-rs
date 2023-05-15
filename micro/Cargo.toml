@@ -1,0 +1,23 @@
+[package]
+name = "micro"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+util = { path = "../util"}
+dotenvy = "0.15.7"
+prost = "0.11.9"
+tokio = { version = "1.28.1", features = ["macros", "rt-multi-thread"] }
+tonic = "0.9.2"
+tonic-reflection = "0.9.2"
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
+serde = "1.0.163"
+redis-derive = "0.1.7"
+sqlx = { version = "0.6.3", features = ["runtime-async-std-native-tls", "mysql", "chrono"] }
+redis = { version = "0.23.0", features = ["aio", "tokio-comp"] }
+
+[build-dependencies]
+tonic-build = "0.9.2"

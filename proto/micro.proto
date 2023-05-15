@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package micro;
+
+service MicroService {
+    rpc CreateMicro (CreateMicroRequest) returns (CreateMicroResponse) {}
+
+    rpc GetMicroById (GetMicroByIdRequest) returns (GetMicroByIdResponse) {}
+}
+message CreateMicroRequest {
+    string name = 1;
+    int32 typ = 2;
+}
+
+message CreateMicroResponse {
+    int32 code = 1;
+    string msg = 2;
+}
+
+message GetMicroByIdRequest {
+    uint32 id = 1;
+}
+
+message GetMicroByIdResponse {
+    int32 code = 1;
+    string msg = 2;
+    Micro data = 3;
+}
+
+message Micro {
+    uint32 id = 1;
+    string name = 2;
+    uint32 view_num = 3;
+    int32 typ = 4;
+    string create_datetime = 5;
+    string update_datetime = 6;
+}
