@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package micro;
+package pb;
 
 service MicroService {
     rpc CreateMicro (CreateMicroRequest) returns (CreateMicroResponse) {}

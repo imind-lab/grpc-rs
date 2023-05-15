@@ -1,8 +1,8 @@
 use tonic::{Request, Response, Status};
-use micro::micro_service_server::MicroService as MicroTrait;
+use pb::micro_service_server::MicroService as MicroTrait;
 
 
-pub mod micro {
+pub mod pb {
     tonic::include_proto!("micro");
     pub(crate) const FILE_DESCRIPTOR_SET: &[u8] =
         tonic::include_file_descriptor_set!("micro_descriptor");
@@ -10,7 +10,7 @@ pub mod micro {
 
 use util::Dao;
 
-pub use micro::{
+pub use pb::{
     Micro,
     micro_service_server::MicroServiceServer,
     GetMicroByIdRequest, GetMicroByIdResponse,
@@ -47,7 +47,7 @@ impl MicroTrait for MicroService {
         match result {
             Ok(micro) => {
                 println!("{:?}", micro);
-                Ok(Response::new(micro::GetMicroByIdResponse {
+                Ok(Response::new(pb::GetMicroByIdResponse {
                     code: 200,
                     msg: "".to_string(),
                     data: Some( micro.into())
@@ -64,11 +64,11 @@ impl MicroTrait for MicroService {
         let req = request.into_inner();
         let domain = MicroDomain;
         let result = domain.create(self.get_dao(), req.into()).await;
-        
+
         match result {
             Ok(micro) => {
                 println!("{:?}", micro);
-                Ok(Response::new(micro::CreateMicroResponse {
+                Ok(Response::new(pb::CreateMicroResponse {
                     code: 200,
                     msg: "".to_string(),
                 }))

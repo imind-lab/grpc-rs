@@ -24,7 +24,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let dao = Dao::new(cfg).await.expect("Dao required");
 
     let service = tonic_reflection::server::Builder::configure()
-        .register_encoded_file_descriptor_set(crate::application::micro::micro::FILE_DESCRIPTOR_SET)
+        .register_encoded_file_descriptor_set(crate::application::micro::pb::FILE_DESCRIPTOR_SET)
         .build()
         .unwrap();
 
