@@ -8,6 +8,8 @@ service MicroService {
     rpc GetMicroById (GetMicroByIdRequest) returns (GetMicroByIdResponse) {}
 
     rpc GetMicroList (GetMicroListRequest) returns (GetMicroListResponse) {}
+
+    rpc GetMicroListByStream (stream GetMicroListByStreamRequest) returns (stream GetMicroListByStreamResponse);
 }
 
 message CreateMicroRequest {
@@ -57,4 +59,14 @@ message GetMicroListResponse {
     int32 code = 1;
     string msg = 2;
     MicroList data = 3;
+}
+
+message GetMicroListByStreamRequest {
+    uint32 index = 1;
+    uint32 id = 2;
+}
+
+message GetMicroListByStreamResponse {
+    uint32 index = 1;
+    Micro result = 2;
 }

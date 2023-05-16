@@ -118,10 +118,8 @@ impl MicroRepository for MicroStore {
                 }
                 let mut micros = Vec::with_capacity(ids.len());
                 for handle in handles {
-                    if let Ok(data) = handle.await {
-                        if let Ok(micro) = data {
-                            micros.push(micro.into())
-                        }
+                    if let Ok(Ok(micro)) = handle.await {
+                        micros.push(micro.into())
                     }
                 }
                 if micros.len() == ids.len() {
