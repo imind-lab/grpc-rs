@@ -1,5 +1,5 @@
-use tonic::Status;
 use thiserror::Error;
+use tonic::Status;
 
 #[derive(Error, Debug)]
 pub enum ApiError {

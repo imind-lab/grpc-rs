@@ -1,3 +1,3 @@
 pub mod micro;
 
-pub use micro::{MicroStore, MicroRepository};
+pub use micro::{MicroRepository, MicroStore};

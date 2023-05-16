@@ -1,13 +1,12 @@
 mod application;
-mod store;
 mod domain;
+mod store;
 
 use dotenvy::dotenv;
 
-use tonic::transport::Server;
 use application::micro::{MicroService, MicroServiceServer};
+use tonic::transport::Server;
 use util::{Config, Dao};
-
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

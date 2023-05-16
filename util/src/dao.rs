@@ -1,9 +1,9 @@
-pub mod database;
 pub mod cache;
+pub mod database;
 
+use crate::{ApiError, Config};
 use cache::Cache;
 use database::Database;
-use crate::{ApiError, Config};
 use redis::Client;
 use sqlx::{MySql, Pool};
 
@@ -12,7 +12,7 @@ pub trait DataOperator {
     fn get_cache_client(&self) -> &Client;
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Dao {
     database: Database,
     cache: Cache,

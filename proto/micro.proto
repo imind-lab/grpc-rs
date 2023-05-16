@@ -1,12 +1,15 @@
 syntax = "proto3";
 
-package pb;
+package micro;
 
 service MicroService {
     rpc CreateMicro (CreateMicroRequest) returns (CreateMicroResponse) {}
 
     rpc GetMicroById (GetMicroByIdRequest) returns (GetMicroByIdResponse) {}
+
+    rpc GetMicroList (GetMicroListRequest) returns (GetMicroListResponse) {}
 }
+
 message CreateMicroRequest {
     string name = 1;
     int32 typ = 2;
@@ -34,4 +37,24 @@ message Micro {
     int32 typ = 4;
     string create_datetime = 5;
     string update_datetime = 6;
+}
+
+message MicroList {
+    int32 total = 1;
+    int32 total_page = 2;
+    int32 cur_page = 3;
+    repeated Micro datalist = 4;
+}
+
+message GetMicroListRequest {
+    int32 typ = 1;
+    int32 page_size = 2;
+    int32 page_num = 3;
+    bool is_desc = 4;
+}
+
+message GetMicroListResponse {
+    int32 code = 1;
+    string msg = 2;
+    MicroList data = 3;
 }

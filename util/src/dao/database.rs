@@ -4,20 +4,21 @@ use sqlx::{
     Pool,
 };
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Database {
     pool: Pool<MySql>,
 }
 
 impl Database {
     pub async fn new(cfg: DBConfig) -> Result<Self, ApiError> {
-        let db_url = format!("mysql://{}:{}@{}:{}/{}", cfg.user, cfg.password, cfg.host, cfg.port, cfg.dbname);
+        let db_url = format!(
+            "mysql://{}:{}@{}:{}/{}",
+            cfg.user, cfg.password, cfg.host, cfg.port, cfg.dbname
+        );
         let pool = MySqlPool::connect(&db_url)
             .await
             .map_err(ApiError::SqlxError)?;
-        Ok(Database {
-            pool,
-        })
+        Ok(Database { pool })
     }
 
     pub fn get_pool(&self) -> &Pool<MySql> {

@@ -1,22 +1,19 @@
 pub mod micro;
 
-use micro::{
-    CreateMicroRequest, 
-    Micro as ProtoMicro,
-};
+use micro::{CreateMicroRequest, Micro as ProtoMicro};
 
-use serde::{Deserialize, Serialize};
 use redis_derive::{FromRedisValue, ToRedisArgs};
+use serde::{Deserialize, Serialize};
 use util::fmt_timestamp;
 
 #[derive(Debug, Serialize, sqlx::FromRow, FromRedisValue, ToRedisArgs, Clone)]
 pub struct Micro {
-    id: u32,
-    name: String,
-    view_num: u32,
-    typ: i8,
-    update_ts: i64,
-    create_ts: i64,
+    pub id: u32,
+    pub name: String,
+    pub view_num: u32,
+    pub typ: i8,
+    pub update_ts: i64,
+    pub create_ts: i64,
 }
 
 impl From<Micro> for ProtoMicro {
@@ -31,7 +28,6 @@ impl From<Micro> for ProtoMicro {
         }
     }
 }
-
 
 #[derive(Deserialize, Debug)]
 pub struct CreateMicro {
