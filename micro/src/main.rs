@@ -27,7 +27,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build()
         .unwrap();
 
-    let addr = "127.0.0.1:8088".parse().unwrap();
+    let addr = "0.0.0.0:8088".parse().unwrap();
 
     let micro_service = MicroService::new(dao);
 
