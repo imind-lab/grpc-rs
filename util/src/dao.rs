@@ -1,7 +1,7 @@
 pub mod cache;
 pub mod database;
 
-use crate::{ApiError, Config};
+use crate::{ApiError, CacheConfig, DBConfig};
 use cache::Cache;
 use database::Database;
 use redis::Client;
@@ -19,9 +19,9 @@ pub struct Dao {
 }
 
 impl Dao {
-    pub async fn new(cfg: Config) -> Result<Self, ApiError> {
-        let database = Database::new(cfg.db).await?;
-        let cache = Cache::new(cfg.cache).await?;
+    pub async fn new(db: DBConfig, cache: CacheConfig) -> Result<Self, ApiError> {
+        let database = Database::new(db).await?;
+        let cache = Cache::new(cache).await?;
         Ok(Self { database, cache })
     }
 }

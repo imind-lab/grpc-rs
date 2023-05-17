@@ -37,7 +37,7 @@ RUN groupadd $APP_USER \
     && mkdir -p ${APP}
 
 COPY --from=builder /app/target/release/micro ${APP}/micro
-COPY .env ${APP}/.env
+COPY micro/.env ${APP}/.env
 
 RUN chown -R $APP_USER:$APP_USER ${APP}
 
